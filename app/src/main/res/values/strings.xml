@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ProductApiJetPack</string>
+    <string name="loading_failed">Loading Failed</string>
+    <string name="loading">Loading</string>
+    <string name="product_image">product image</string>
+
+</resources>
