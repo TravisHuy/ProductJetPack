@@ -10,12 +10,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.productapijetpack.ui.ProductsApp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.productapijetpack.ui.ProductApp
+import com.example.productapijetpack.ui.ProductViewModel
+import com.example.productapijetpack.ui.ProductViewModelFactory
 import com.example.productapijetpack.ui.theme.ProductsTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val productRepository = (application as ProductsApplication).productRepository
+        val viewModelFactory= ProductViewModelFactory(productRepository)
         setContent {
             ProductsTheme {
                 // A surface container using the 'background' color from the theme
@@ -23,7 +29,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ProductsApp()
+                    val viewModel:ProductViewModel =viewModel(factory=viewModelFactory)
+                    ProductApp(viewModel = viewModel)
                 }
             }
         }
@@ -42,6 +49,5 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     ProductsTheme {
-        ProductsApp()
     }
 }
